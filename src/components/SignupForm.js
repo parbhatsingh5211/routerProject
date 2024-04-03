@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
+import toast from 'react-hot-toast'
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
-const SignupForm = () => {
+const SignupForm = ({setIsLoggedIn}) => {
 
-    const [FormData, setFormData] = useState({
+    const navigate= useNavigate();
+    const [formData, setFormData] = useState({
         fname:"", lname:"", email:"",
         password:"", confirmPassword:""
     })
@@ -16,7 +19,18 @@ const SignupForm = () => {
           ...prevData, 
           [event.target.name]:event.target.value
         }))
-      }
+    }
+
+    function submitHandler(event){
+        event.preventDefault();
+        if(formData.password !== formData.confirmPassword ){
+            toast.error("Password do not match");
+            return;
+        }
+        setIsLoggedIn(true);
+        toast.success("Account Created");
+        navigate("/dashboard");
+    }
 
   return (
     <div>
@@ -30,7 +44,7 @@ const SignupForm = () => {
             </button>
         </div>
 
-        <form>
+        <form onSubmit={submitHandler}>
             {/* first name and last name */}
             <div>
                 <label>
@@ -41,7 +55,7 @@ const SignupForm = () => {
                         name='fname'
                         onChange={changeHandler}
                         placeholder='Enter First Name'
-                        value={FormData.fname}
+                        value={formData.fname}
                     />
                 </label>
 
@@ -53,7 +67,7 @@ const SignupForm = () => {
                         name='lname'
                         onChange={changeHandler}
                         placeholder='Enter Last Name'
-                        value={FormData.lname}
+                        value={formData.lname}
                     />
                 </label>
             </div>
@@ -67,7 +81,7 @@ const SignupForm = () => {
                     name='email'
                     onChange={changeHandler}
                     placeholder='Enter Email id'
-                    value={FormData.email}
+                    value={formData.email}
                 />
             </label>
 
@@ -81,9 +95,9 @@ const SignupForm = () => {
                         name='password'
                         onChange={changeHandler}
                         placeholder='Enter Password'
-                        value={FormData.password}
+                        value={formData.password}
                     />
-                     <span onClick={setShowPassword((prev)=>!prev)}>
+                     <span onClick={()=>setShowPassword((prev)=>!prev)}>
                         {showPassword ? 
                         (<AiOutlineEyeInvisible/>) : 
                         (<AiOutlineEye/>)}
@@ -98,9 +112,9 @@ const SignupForm = () => {
                         name='confirmPassword'
                         onChange={changeHandler}
                         placeholder='Confirm Password'
-                        value={FormData.confirmPassword}
+                        value={formData.confirmPassword}
                     />
-                    <span onClick={setShowConfirmPassword((prev)=>!prev)}>
+                    <span onClick={()=>setShowConfirmPassword((prev)=>!prev)}>
                         {showConfirmPassword ? 
                         (<AiOutlineEyeInvisible/>) : 
                         (<AiOutlineEye/>)}
