@@ -44,12 +44,16 @@ const SignupForm = ({setIsLoggedIn}) => {
             </button>
         </div>
 
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler}
+            className='flex flex-col w-full gap-y-4 mt-6'>
             {/* first name and last name */}
             <div>
-                <label>
-                    <p>First Name</p><sup>*</sup>
+                <label className='w-full '>
+                    <p className='text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]'
+                    >First Name<sup className='text-pink-200'>*</sup>
+                    </p>
                     <input
+                        className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-700'
                         required
                         type="text"
                         name='fname'
@@ -59,9 +63,12 @@ const SignupForm = ({setIsLoggedIn}) => {
                     />
                 </label>
 
-                <label>
-                    <p>Last Name</p><sup>*</sup>
+                <label className='w-full '>
+                    <p className='text-[0.875rem] text-richblack-5 mb-1 mt-3 leading-[1.375rem]'
+                    >Last Name<sup className='text-pink-200'>*</sup>
+                    </p>
                     <input
+                        className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-700'
                         required
                         type="text"
                         name='lname'
@@ -73,23 +80,29 @@ const SignupForm = ({setIsLoggedIn}) => {
             </div>
             
 
-            <label>
-                <p>Email</p><sup>*</sup>
+            <label className='w-full '>
+                <p className='text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]'>
+                    Email Address<sup className='text-pink-200'>*</sup>
+                </p>
                 <input
-                    required
-                    type="email"
-                    name='email'
-                    onChange={changeHandler}
-                    placeholder='Enter Email id'
-                    value={formData.email}
+                className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-700'
+                required
+                type="email"
+                value =  {formData.email}
+                onChange={changeHandler}
+                placeholder='Enter email address'
+                name='email'
                 />
             </label>
 
             {/* create Password and confirm password */}
            <div>
-                <label>
-                    <p>Create Password</p><sup>*</sup>
+                <label className='w-full relative'>
+                    <p className='text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]'
+                    >Create Password<sup className='text-pink-200'>*</sup>
+                    </p>
                     <input
+                        className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-700'
                         required
                         type={showPassword ? ("text") : ("password")}
                         name='password'
@@ -97,16 +110,21 @@ const SignupForm = ({setIsLoggedIn}) => {
                         placeholder='Enter Password'
                         value={formData.password}
                     />
-                     <span onClick={()=>setShowPassword((prev)=>!prev)}>
+                     <span 
+                        className='absolute right-3 top-[38px] cursor-pointer '
+                        onClick={()=>setShowPassword((prev)=>!prev)}>
                         {showPassword ? 
-                        (<AiOutlineEyeInvisible/>) : 
-                        (<AiOutlineEye/>)}
+                        (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>) : 
+                        (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>)}
                     </span>
                 </label>
 
-                <label>
-                    <p>Confirm Password</p><sup>*</sup>
+                <label className='w-full relative'>
+                    <p className='text-[0.875rem] text-richblack-5 mb-1 mt-3 leading-[1.375rem]'
+                    >Confirm Password<sup className='text-pink-200'>*</sup>
+                    </p>
                     <input
+                        className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-700'
                         required
                         type={showConfirmPassword ? ("text") : ("password")}
                         name='confirmPassword'
@@ -114,15 +132,18 @@ const SignupForm = ({setIsLoggedIn}) => {
                         placeholder='Confirm Password'
                         value={formData.confirmPassword}
                     />
-                    <span onClick={()=>setShowConfirmPassword((prev)=>!prev)}>
+                    <span 
+                        className='absolute right-3 top-[72px] cursor-pointer '
+                        onClick={()=>setShowConfirmPassword((prev)=>!prev)}>
                         {showConfirmPassword ? 
-                        (<AiOutlineEyeInvisible/>) : 
-                        (<AiOutlineEye/>)}
+                        (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>) : 
+                        (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>)}
                     </span>
+
                 </label>
            </div>
 
-           <button>
+           <button className='w-full bg-yellow-50 rounded-[8px] font-medium text-richblack-900 px-[12px] py-[8px] mt-6'>
             Create Account
            </button>
         </form>
